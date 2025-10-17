@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ 'Editar' if s else 'Novo' }} Horário</h1>
+<form method="post" class="form">
+  <div class="grid">
+    <label>Nome <input type="text" name="nome" value="{{ s.nome if s else '' }}" required></label>
+    <label>Entrada Manhã <input type="time" name="entrada_manha" value="{{ s.entrada_manha if s else '08:00' }}"></label>
+    <label>Saída Manhã <input type="time" name="saida_manha" value="{{ s.saida_manha if s else '12:00' }}"></label>
+    <label>Entrada Tarde <input type="time" name="entrada_tarde" value="{{ s.entrada_tarde if s else '14:00' }}"></label>
+    <label>Saída Tarde <input type="time" name="saida_tarde" value="{{ s.saida_tarde if s else '18:00' }}"></label>
+  </div>
+  <div class="actions">
+    <button class="btn" type="submit">Salvar</button>
+    <a class="btn" href="{{ url_for('horarios') }}">Voltar</a>
+  </div>
+</form>
+{% endblock %}

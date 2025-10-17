@@ -1,0 +1,36 @@
+/* Paleta V3.1: azul #0328f8, branco #ffffff, amarelo #ffc200 */
+*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f6f8fb;color:#222}
+.topbar {
+  background: #0328f8;     /* fundo azul */
+  color: #ffffff;          /* texto branco */
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;     /* centraliza vertical */
+  justify-content: center; /* centraliza horizontal */
+  position: sticky;
+  top: 0;
+  z-index: 10}
+.topbar a{color:#ffffff;margin-left:12px;text-decoration:none}
+.topbar .brand{font-weight:bold}
+.container{padding:16px}
+.cards{display:flex;gap:12px;margin:12px 0}
+.card{background:#ffffff;border-left:6px solid #0328f8;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);padding:16px;min-width:140px}
+.card.accent{border-left-color:#ffc200}
+.card .value{font-size:24px;font-weight:bold}
+.table{width:100%;border-collapse:collapse;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.table th,.table td{padding:10px;border:1px solid #e8eef6}
+.table thead{background:#eef3ff}
+.form,.form-inline{background:#ffffff;padding:12px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:12px}
+.form .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+label{display:flex;flex-direction:column;font-size:14px;gap:6px}
+input,select{padding:8px;border:1px solid #cfd8ea;border-radius:6px}
+.btn{background:#0328f8;color:#ffffff;border:none;padding:8px 12px;border-radius:8px;text-decoration:none;cursor:pointer;display:inline-block}
+.btn.small{padding:6px 8px;font-size:12px}
+.btn.danger{background:#d24747}
+.btn.accent{background:#ffc200;color:#222}
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;flex-wrap:wrap}
+.flash{padding:8px;border-radius:8px;margin:8px 0}
+.flash.success{background:#e9f8ef}
+.flash.danger{background:#ffeaea}
+.hint{margin:8px 0;color:#666}
+.auth{max-width:360px}

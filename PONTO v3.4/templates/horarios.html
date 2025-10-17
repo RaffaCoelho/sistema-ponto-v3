@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Horários</h1>
+<a class="btn" href="{{ url_for('horario_novo') }}">+ Novo Horário</a>
+<table class="table">
+  <thead><tr><th>Nome</th><th>Manhã</th><th>Tarde</th><th>Ações</th></tr></thead>
+  <tbody>
+  {% for h in horarios %}
+    <tr>
+      <td>{{ h.nome }}</td>
+      <td>{{ h.entrada_manha }} - {{ h.saida_manha }}</td>
+      <td>{{ h.entrada_tarde }} - {{ h.saida_tarde }}</td>
+      <td>
+        <a class="btn small" href="{{ url_for('horario_editar', sid=h.id) }}">Editar</a>
+        <form action="{{ url_for('horario_excluir', sid=h.id) }}" method="post" style="display:inline" onsubmit="return confirm('Excluir horário?')">
+          <button class="btn danger small" type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

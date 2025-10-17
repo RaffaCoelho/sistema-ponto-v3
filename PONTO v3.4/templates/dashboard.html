@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Dashboard</h1>
+<img scr="logo_crh.png">
+<div class="cards">
+  <div class="card accent"><div class="value">{{ total }}</div><div class="label">Funcionários</div></div>
+  <div class="card"><div class="value">{{ ativos }}</div><div class="label">Ativos</div></div>
+  <div class="card"><div class="value">{{ demitidos }}</div><div class="label">Demitidos</div></div>
+</div>
+ 
+
+{% if current_user.is_admin %}
+  <p><a class="btn" href="{{ url_for('register') }}">+ Criar Usuário</a></p>
+{% endif %}
+{% endblock %}

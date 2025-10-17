@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Funcionários</h1>
+<div class="toolbar">
+  <form method="get" class="filters">
+    <input type="text" name="busca" placeholder="Buscar por nome ou matrícula" value="{{ filtros.busca }}">
+
+<select name="situacao">
+  <option value="Ativos" {% if filtros.situacao == 'Ativos' %}selected{% endif %}>Ativos</option>
+  <option value="Demitidos" {% if filtros.situacao == 'Demitidos' %}selected{% endif %}>Demitidos</option>
+  <option value="Todos" {% if filtros.situacao == 'Todos' %}selected{% endif %}>Todos</option>
+</select>
+
+<select name="funcao">
+  <option value="">-- Função --</option>
+  {% for f in funcoes %}
+    <option value="{{ f }}" {% if filtros.funcao == f %}selected{% endif %}>{{ f }}</option>
+  {% endfor %}
+
+</select>
+    <select name="setor">
+  <option value="">-- Setor --</option>
+  {% for s in setores %}
+    <option value="{{ s }}" {% if filtros.setor == s %}selected{% endif %}>{{ s }}</option>
+  {% endfor %}
+</select>
+
+<select name="lotacao">
+  <option value="">-- Lotação --</option>
+  {% for l in lotacoes %}
+    <option value="{{ l }}" {% if filtros.lotacao == l %}selected{% endif %}>{{ l }}</option>
+  {% endfor %}
+</select>
+
+    <button type="submit" class="btn">Filtrar</button>
+  </form>
+  <div>
+    <a class="btn" href="{{ url_for('funcionario_novo') }}">+ Novo</a>
+  </div>
+</div>
+
+<table class="table">
+  <thead><tr><th>Matrícula</th><th>Nome</th><th>Setor</th><th>Lotação</th><th>Função</th><th>Situação</th><th>Ações</th></tr></thead>
+  <tbody>
+  {% for f in funcionarios %}
+    <tr>
+      <td>{{ f.id }}</td>
+      <td>{{ f.nome }}</td>
+      <td>{{ f.setor or '-' }}</td>
+      <td>{{ f.lotacao or '-' }}</td>
+      <td>{{ f.funcao or '-' }}</td>
+      <td>{{ 'Ativo' if not f.demissao else 'Demitido' }}</td>
+      <td>
+        <a class="btn small" href="{{ url_for('funcionario_editar', matricula=f.id) }}">Editar</a>
+        <a class="btn small" href="{{ url_for('relatorio_individual', matricula=f.id) }}">PDF</a>
+        <form action="{{ url_for('funcionario_excluir', matricula=f.id) }}" method="post" style="display:inline" onsubmit="return confirm('Excluir?');">
+          <button class="btn danger small" type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

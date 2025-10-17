@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Feriados</h1>
+<form method="post" class="form-inline">
+  <label>Data <input type="date" name="data" required></label>
+  <label>Nome <input type="text" name="nome" required></label>
+  <button class="btn" type="submit">Adicionar</button>
+</form>
+<table class="table">
+  <thead><tr><th>Data</th><th>Nome</th><th>Ações</th></tr></thead>
+  <tbody>
+  {% for h in feriados %}
+    <tr>
+      <td>{{ h.data.strftime('%d/%m/%Y') }}</td>
+      <td>{{ h.nome }}</td>
+      <td>
+        <form method="post" action="{{ url_for('feriado_excluir', hid=h.id) }}" onsubmit="return confirm('Excluir feriado?')" style="display:inline">
+          <button class="btn danger small" type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="hint">Dica: você pode popular feriados nacionais por ano diretamente no banco ou adicionar manualmente.</p>
+{% endblock %}

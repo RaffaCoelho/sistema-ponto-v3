@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Backup</h1>
+<div class="form">
+  <p class="hint">Exporte o banco atual (SQLite) ou restaure a partir de um arquivo .sqlite</p>
+  <div class="toolbar">
+    <a class="btn" href="{{ url_for('backup_export') }}">Exportar banco</a>
+    <form action="{{ url_for('backup_import') }}" method="post" enctype="multipart/form-data">
+      <input type="file" name="arquivo" accept=".sqlite,.db" required>
+      <button class="btn accent" type="submit">Importar / Restaurar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

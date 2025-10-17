@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ 'Editar' if f else 'Novo' }} Funcionário</h1>
+<form method="post" class="form">
+  <div class="grid">
+    <label>Matrícula
+      <input type="text" name="matricula" value="{{ f.id if f else '' }}" {{ 'readonly' if f }} required>
+    </label>
+    <label>Nome
+      <input type="text" name="nome" value="{{ f.nome if f else '' }}" required>
+    </label>
+    <label>Função
+      <input type="text" name="funcao" value="{{ f.funcao if f else '' }}" required>
+    </label>
+    <label>Setor
+      <input type="text" name="setor" value="{{ f.setor if f else '' }}">
+    </label>
+    <label>Lotação
+      <input type="text" name="lotacao" value="{{ f.lotacao if f else '' }}">
+    </label>
+    <label>Admissão
+      <input type="date" name="admissao" value="{{ f.admissao if f and f.admissao else '' }}">
+    </label>
+    <label>Demissão
+      <input type="date" name="demissao" value="{{ f.demissao if f and f.demissao else '' }}">
+    </label>
+    <label>Horário
+      <select name="schedule_id">
+        <option value="">-- Selecione --</option>
+        {% for s in schedules %}
+          <option value="{{s.id}}" {{ 'selected' if f and f.schedule_id==s.id }}>{{ s.nome }} ({{s.entrada_manha}}-{{s.saida_manha}} / {{s.entrada_tarde}}-{{s.saida_tarde}})</option>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+  <div class="actions">
+    <button type="submit" class="btn">Salvar</button>
+    <a class="btn" href="{{ url_for('funcionarios') }}">Voltar</a>
+  </div>
+</form>
+{% endblock %}

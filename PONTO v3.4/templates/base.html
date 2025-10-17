@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema de Ponto FUNAD</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <nav class="topbar">
+    <div class="brand">Ponto FUNAD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="navlinks">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard') }}">• Dashboard&nbsp;</a>
+        <a href="{{ url_for('funcionarios') }}">• Funcionários&nbsp;</a>
+        <a href="{{ url_for('horarios') }}">• Horários&nbsp;</a>
+        <a href="{{ url_for('feriados') }}">• Feriados&nbsp;</a>
+        <a href="{{ url_for('relatorios') }}">• Relatórios&nbsp;</a>
+        <a href="{{ url_for('backup_page') }}">• Backup&nbsp;&nbsp;</a>
+       
+        <a class="btn danger small" href="{{ url_for('logout') }}">Sair</a>
+        
+      {% endif %}
+    </div>
+  </nav>
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for cat, msg in messages %}
+          <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

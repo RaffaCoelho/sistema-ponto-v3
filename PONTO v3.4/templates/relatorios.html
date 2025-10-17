@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Relatórios</h1>
+<form class="form-inline" action="{{ url_for('relatorio_lote') }}" method="get">
+  <label>Mês <input type="number" name="mes" min="1" max="12" value="{{ request.args.get('mes', '') }}"></label>
+  <label>Ano <input type="number" name="ano" min="1900" max="2100" value="{{ request.args.get('ano', '') }}"></label>
+  <label>Busca <input type="text" name="busca" value="{{ request.args.get('busca','') }}" placeholder="Nome ou matrícula"></label>
+  <label>Setor <input type="text" name="setor" value="{{ request.args.get('setor','') }}"></label>
+  <label>Função <input type="text" name="funcao" value="{{ request.args.get('funcao','') }}"></label>
+  <label>Lotação <input type="text" name="lotacao" value="{{ request.args.get('lotacao','') }}"></label>
+
+  <label>Situação
+    <select name="situacao">
+      <option value="Ativos">Ativos</option>
+      <option value="Demitidos">Demitidos</option>
+      <option value="Todos">Todos</option>
+    </select>
+  </label>
+  <button class="btn" type="submit">Gerar PDF (lote filtrado)</button>
+<a class="btn accent" href="{{ url_for('relatorio_excel') }}?{{ request.query_string.decode() }}">Exportar Excel (.xlsx)</a>
+</form>
+<p>Para PDF individual, use o botão <b>PDF</b> na lista de funcionários, ou acesse:
+<code>/relatorios/pdf/&lt;matricula&gt;?mes=...&amp;ano=...</code></p>
+{% endblock %}

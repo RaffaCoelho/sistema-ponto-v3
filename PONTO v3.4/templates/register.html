@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Novo Usuário</h1>
+<form method="post" class="form">
+  <label>Usuário <input type="text" name="username" required></label>
+  <label>Senha <input type="password" name="password" required></label>
+  <label class="check"><input type="checkbox" name="is_admin"> Administrador</label>
+  <div class="actions">
+    <button class="btn" type="submit">Criar</button>
+    <a class="btn" href="{{ url_for('dashboard') }}">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
